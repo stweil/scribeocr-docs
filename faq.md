@@ -1,17 +1,30 @@
 # FAQ/Support
 
+## Recognizing Text with Built-in OCR Engine
+
+### Why is recognition slow on my device/document?
+Recognition should be relatively fast.  Even using the "quality" mode, a 20 page document can generally be recognized in 30-40 seconds on a modern desktop.  If recognition is running slowly, it may be for one of the following reasons.
+
+- Recognition is slower on slower devices.
+	- All recognition is executed locally in the browser.
+	- Recognition will run significantly faster on a fast desktop than on a mobile phone.
+- Recognition is slower for complex and/or low-quality documents.
+	- Complex documents (multi-column layouts, tables, etc.) will be recognized slower than simple, single-column documents.
+	- Low-quality documents will take longer to recognize than high-quality documents, as more fallback strategies and checking must be implemented.
+- Recognition is slower when devtools is open.
+
 ## Loading Existing OCR Data
 
+### What OCR formats can I edit using ScribeOCR?
+ScribeOCR allows for editing existing Tesseract `.hocr` and Abbyy `.xml` files that include character-level metrics.
+
+Character-level metrics are necessary to accurately position text, however unfortunately neither Tesseract nor Abbyy includes them by default.  Therefore, this setting needs to be enabled before recognition.  In Tesseract, character-level metrics in `.hocr` output are enabled by setting `hocr_char_boxes=1`.  In Abbyy, character-level metrics in `.xml` output are enabled by setting the `WriteCharAttributes` option.
+
+### How can I visualize/edit existing OCR data?
+When importing files, simply select your Tesseract `.hocr` or Abbyy `.xml` files alongside your image or PDF files.
+
 ### Can I visualize/edit the existing OCR data in a PDF file?  
-No, this is currently not supported.  Overlay text must be generated using the built-in OCR engine, or provided via separate Tesseract .hocr or Abbyy .xml files. 
-
-### Is character-level OCR data required?  Why?
-For Tesseract .hocr, character-level data is highly recommended but not required.  If no character-level data is found, words will still be overlayed, however font optimization will be disabled (as not enough information exists to create an optimized font).
-
-For Abbyy .xml, character-level data is required.  While Tesseract will still report word-level metrics when character-level metrics are disabled, Abbyy does not report where words are positioned. 
-
-### How can I create character-level data in my OCR program? 
-For Tesseract, set the config variable `hocr_char_boxes=1`.  For example, the entire command might be `tesseract [input file] [output file] -c hocr_char_boxes=1 hocr`.  Alternatively, all OCR data generated using Scribe OCR's built-in Tesseract engine will utilize character-level data.  
+No, this is currently not supported.  Unfortunately, the invisible text added by OCR programs is not precise enough for printing it visibly to be useful.  Overlay text must be generated using the built-in OCR engine, or provided via separate Tesseract .hocr or Abbyy .xml files. 
 
 ### Are other OCR engines supported?
 It may be possible to use data from other OCR engines that export to .hocr.  However, doing so has not been tested.  If you use Scribe OCR with another engine, feel free to open an issue and report how it went. 
@@ -19,49 +32,45 @@ It may be possible to use data from other OCR engines that export to .hocr.  How
 ### Why is text being printed on the wrong image?
 When multiple image (.png or .jpeg) and/or OCR (.hocr or .xml) files are uploaded, all files of the same type are ordered alphabetically.  Check that your files are named in alphabetical order.  A common mistake is forgetting to pad numbers with leading 0s (remember that “pic_10” comes before “pic_2” in alphabetic order). 
 
-### Why has text disappeared from the PDF I uploaded? 
-Scribe OCR does not have the ability to render text and ignores any text content encountered.  It expects .pdf files with images of text, not text-based PDFs.  
-
-## Recognizing Text with Built-in OCR Engine
-
-### What devices support the built-in OCR engine? 
-The built-in engine should run on all common device/browser combinations, however performance will vary significantly between devices.  In addition to some devices being faster than others (in terms of clock speed, cores, etc.), there are 2 versions of the built-in Tesseract OCR engine that Scribe OCR chooses between based on what your device supports.  The fast (SIMD-enabled) version is loaded for users with modern Intel/AMD processors (supporting SSE 4.2).  The slower (SIMD disabled) version is loaded on all other devices.  You can confirm which version has been loaded on your device by checking `About > Debug Info > SIMD Support`. 
-
-Notably, while the SIMD-disabled version is much slower using the Tesseract LSTM engine, no such disparity exists using the Tesseract Legacy engine.  Therefore, if you do not have access to a device that supports the SIMD-enabled version and are finding Tesseract LSTM performance unacceptably slow, consider switching to the Tesseract Legacy engine. 
-
-### Why is recognition slow?
-If OCR performance is poor, check the following possible explanations. 
-1. Are you using a device that supports the faster (SIMD-enabled) version of Tesseract? 
-    -	See "What devices support the built-in OCR engine?" section above
-1.	Are you using a slow device?
-    -	The entire program is executed locally in your browser, so performance will vary significantly by device. 
-
 ## Reviewing and Editing OCR Text
 
 ### Why isn't the overlay text in my document lining up as well as in the examples? 
-If your results are significantly worse than the above example, check the following possible explanations.  
-1.	Is the appropriate default font being used?
-    -	“Libre Baskerville” should be used for serif text, and “Open Sans” for sans serif text. 
-1.	Is font optimization enabled?
-1.	Is the page you are viewing representative of your document as a whole?
-    -	At present, only a single optimized font is created for the entire document.
-    -	As books often use different fonts for the initial pages (title page, table of contents, etc.), results are often worse in the first few pages.  Try skipping several pages ahead and see if results improve. 
-1.	Is the document image distorted? 
-    -	Text is drawn in lines that are straight and parallel. 
-    -	Documents that are warped (the lines are either not straight or not parallel to each other) will therefore not align with the text. 
+If your results are significantly worse than the above example, check the following possible explanations.
 
-If none of them explain your issue, please open a Git Issue with enough data to reproduce the problem. 
+- Is the image low-quality?
+	- Recognition quality and overlay quality will always be worse on low-quality images.
+	- Try re-scanning the document at a higher quality.
+		- If this is impossible, simply upscaling the existing image may produce significantly better results.
+- Is the image distorted?
+	- ScribeOCR can print lines at an angle, however the lines will always be straight and parallel.
+	- Documents that are warped (the lines are either not straight or not parallel) cannot be accurately represented by the overlay.
+- If OCR data was uploaded, does it include granular and accurate positioning data?
+	- If uploading Tesseract data, does the data include character-level metrics?
+		- These can be enabled by setting `hocr_char_boxes=1`
+	- If uploading Tesseract LSTM data, some word bounding boxes may be noticeably incorrect.
+		- Unfortunately, this is an issue with Tesseract, so is not something we can resolve here.
+- Is the page you are viewing representative of the document as a whole?
+	- At present, ScribeOCR optimizes one sans font and one serif font for the entire document.
+	- Therefore, if a particular page has a non-standard font, the overlay will be worse for that page.
+		- For example, if you are scanning a book and the title page overlays poorly, review the main text before concluding overlay is poor for the document.
+
+If none of these possibilities explain your issue, please open a Git Issue with enough data to reproduce the problem. 
 
 ### Is character formatting information (e.g. italics) in OCR data used when printing overlay text? 
-Character formatting data (specifically the identification of italics, small caps, and superscripts) is used for Abbyy but not Tesseract.  Testing found this data to be generally reliable for Abbyy.  However, for Tesseract formatting data was found to be so unreliable that including it caused more work than it alleviated.  
+Italic text is detected when using the built-in recognition engine.  Additionally, italics reported in uploaded Abbyy .xml data are observed.  Italics reported by uploaded Tesseract `.hocr` data are ignored, as testing found that italics reported by Tesseract were generally incorrect.
+
+When OCR engines report text is bold, this is ignored, regardless of the OCR program being used.  Testing found that no commonly-used OCR engine was capable of reliably identifying bold text.
 
 ### How can I save my progress and continue editing later?
 Download your current document as HOCR.  This can be imported later (alongside your images/pdfs) to continue editing. 
 
-### Why can't I precisely adjust the position of words? 
-
+### Why can't I vertically adjust individual words? 
+ScribeOCR stores all words within lines, and all words within a line share the same baseline (superscripts aside).  This model precludes arbitrary glyph/word-level positioning, so it will never be possible to drag around text boxes like in a photo editor like Photoshop or Illustrator.  Rather, the editor is intended to support features similar to a word processor like Microsoft Word.
 
 ## Exporting Data
+
+### What output formats can be edited later?
+The HOCR format is the only format that allows for editing at a later point.  Therefore, saving a `.hocr` file is strongly recommended, as this will allow for fixing any errors you may catch after closing the application. 
 
 ### Why is the PDF I downloaded larger than the PDF I uploaded? 
 Scribe OCR is built to use .png and .jpeg images, and does not currently support directly editing PDFs.  When it encounters a .pdf, it simply renders each page to a .png file as a convenience.  In cases when an input .pdf is highly optimized, rendering to a series of .png files can significantly increase file size.    
@@ -69,13 +78,3 @@ Scribe OCR is built to use .png and .jpeg images, and does not currently support
 ## Miscellaneous
 ### Is my data uploaded to a server?
 No.  The entire program runs on your browser.  An downloadable/offline version could be offered in the future.
-
-### Why is the application running slowly?
-If performance is poor, check the following possible explanations. 
-1.	Are you using a slow device?
-    -	The entire program is executed locally in your browser, so performance will vary significantly by device. 
-1.	Are you using a .pdf for images (rather than .png or .jpeg)? 
-    -	Using a .pdf file is currently significantly slower than using .png or .jpeg files (as pdfs are rendered to images by a separate library).
-    -	Consider converting your .pdf to .jpeg or .png images and trying again.
-        - This can be accomplished using GhostScript on Linux with the following command:
-        -	`gs -dNOPAUSE -dBATCH -sDEVICE=pnggray -dUseCropBox -r300 -sOutputFile="Pic-%03d.png" [pdf file]`
