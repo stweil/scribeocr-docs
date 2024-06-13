@@ -21,6 +21,6 @@ Most OCR output formats either compromise on faithfully representing the origina
 
 # Getting Started
 
-To get started, visit [scribeocr.com](scribeocr.com) and import a scanned document.  The document may be a single .pdf or series of .png or .jpeg images (named in alphabetic order).  You can then recognize text by switching to the “Recognize” tab and clicking “Recognize Text”.  
+To get started, visit [scribeocr.com](https://scribeocr.com) and import a scanned document.  The document may be a single .pdf or series of .png or .jpeg images (named in alphabetic order).  You can then recognize text by switching to the “Recognize” tab and clicking “Recognize Text”.  
 
 Alternatively, you can upload your own OCR data alongside your pdf/image files.  Both .hocr files from Tesseract and .xml files from Abbyy are supported.  Be sure to enable character-level output.

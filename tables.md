@@ -34,6 +34,12 @@ Select `Info` -> `Optional Features` -> `Extract Tables`.  This will enable the 
 	- Columns can be added/deleted through a combination of resizing the table, and splitting/combining existing columns.
 		- When the table is resized to exclude a column, that column is automatically deleted.
 
+### Set Default Page Layout
+It is possible to set a default layout, which will be applied to all pages where tables where pages have not been edited manually.  Setting a default makes it easy to process documents such as invoices or reports, where 50 pages may contain the same layout. 
+
+1. To make the layout from the current page the default, click `Save As Default`.
+2. To discard all edits made to an individual page, reverting it to the default, click `Revert To Default`.
+
 # Text Assignment to Columns
 By default, individual words are assigned to the column they overlap the most with.  While this behavior is generally correct, users can modify how words are assigned to columns by right clicking column(s) and selecting options in the `Overlap Rules` drop-down menu.  Specifically, the following properties can be modified.
 
