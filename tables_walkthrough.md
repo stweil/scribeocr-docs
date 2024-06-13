@@ -1,3 +1,10 @@
+---
+layout: default
+title: Table Extraction - Walkthrough
+parent: Experimental
+nav_order: 2
+---
+
 This page provides a walkthrough for new users who want to extract tables from PDFs.  For more detailed reference material, see the "Data Table Extraction" reference page.
 
 # Example: Simple Table

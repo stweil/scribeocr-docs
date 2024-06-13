@@ -1,3 +1,9 @@
+---
+layout: default
+title: Controls
+nav_order: 3
+---
+
 # Controls
 
 ### Pan

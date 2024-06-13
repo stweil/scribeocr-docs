@@ -1,3 +1,10 @@
+---
+layout: default
+title: Table Extraction - Reference
+parent: Experimental
+nav_order: 3
+---
+
 # Overview
 {: .warning }
 This feature is experimental.  It may be only partially implemented and/or not work as expected, and should not be relied upon for important tasks.

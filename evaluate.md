@@ -1,3 +1,10 @@
+---
+layout: default
+title: Evaluate OCR Data
+parent: Advanced
+nav_order: 1
+---
+
 # Evaluate OCR Data
 Scribe OCR can be used to evaluate the accuracy of OCR data by comparing against ground truth data.  This can be used to benchmark different OCR programs or configurations.
 

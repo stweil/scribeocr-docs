@@ -1,3 +1,9 @@
+---
+layout: default
+title: Support
+nav_order: 5
+---
+
 # Support
 ## Requesting Support
 Please review the documentation before requesting support.  Most common questions are already answered in the FAQ.
