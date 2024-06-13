@@ -1,9 +1,3 @@
----
-layout: default
-title: Home
-nav_order: 1
----
-
 # Overview
 
 Scribe OCR is a free and open-source web application for recognizing text, proofreading OCR data, and creating fully-digitized documents.  By precisely overlaying editable OCR text over source images, it allows for easy proofreading and the creation of fully digitized versions of print documents. 

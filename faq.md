@@ -1,9 +1,3 @@
----
-layout: default
-title: FAQ
-nav_order: 5
----
-
 # FAQ
 
 ## Recognizing Text with Built-in OCR Engine

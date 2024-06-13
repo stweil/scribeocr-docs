@@ -1,9 +1,3 @@
----
-layout: default
-title: Table Extraction
-nav_order: 7
----
-
 # Overview
 {: .warning }
 This feature is experimental.  It may be only partially implemented and/or not work as expected, and should not be relied upon for important tasks.
