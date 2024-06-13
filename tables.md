@@ -6,10 +6,8 @@ nav_order: 3
 ---
 
 # Overview
-{: .warning }
-This feature is experimental.  It may be only partially implemented and/or not work as expected, and should not be relied upon for important tasks.
-
 The data table extraction feature of Scribe OCR allows for `.pdf` files containing tables to be converted to `.xlsx`. 
+
 ## Enabling Table Extraction
 Select `Info` -> `Optional Features` -> `Extract Tables`.  This will enable the `Layout` tab, and add the `Data Tables` pane, which can be used to add tables.
 

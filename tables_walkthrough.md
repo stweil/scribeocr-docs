@@ -5,7 +5,8 @@ parent: Experimental
 nav_order: 2
 ---
 
-This page provides a walkthrough for new users who want to extract tables from PDFs.  For more detailed reference material, see the "Data Table Extraction" reference page.
+# Overview
+This page provides a walkthrough for new users who want to extract tables from PDFs.  For more detailed reference material, see the [Table Extraction - Reference]({{ site.baseurl }}/tables.html) page.
 
 # Example: Simple Table
 In this example, we will extract a single table from an Amazon 8K filing.  This table is simple, so extracting the data only takes a few steps.
