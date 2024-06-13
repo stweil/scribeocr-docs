@@ -47,4 +47,6 @@ Proceed to add the remaining columns.  The column bounds can be adjusted by drag
 Once the text layer and table layout are both accurate, it is time to export the data.  To export the table in a tabular format, select `Download` -> `Format` -> `Xlsx`, and then click `Download`.  A `.xlsx` file containing your table should download.
 ![data_table_6.png]({{ site.baseurl }}/img/data_table_6.png)
 
+![data_table_7.png]({{ site.baseurl }}/img/data_table_7.png)
+
 As a general practice, it is prudent to always download a `.hocr` file in addition the file format you ultimately want.  HOCR is the only format that allows for restoring an editing session later, so allows for fixing any mistakes you may notice in the future. 
