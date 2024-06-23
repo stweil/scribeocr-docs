@@ -46,7 +46,7 @@ By default, individual words are assigned to the column they overlap the most wi
 - Is text assigned to columns on a word-by-word basis, or should entire lines be assigned to columns?
 	- Select `word` to assign text to column by word; select `line` to assign entire lines to the same column.
 - Is text assigned to columns based on where the text starts, or based on where the majority of the text is found?
-	- Select `word` to assign text to the column where the text starts; select `majority` to assign text to the column it overlaps the most with.
+	- Select `left` to assign text to the column where the text starts; select `majority` to assign text to the column it overlaps the most with.
 
 # Downloading Data
 To download tables in a tabular format, navigate to the `Download` tab, and then set the format to `.xlsx`.  Excel (`.xlsx`) is currently the only supported format for writing tabular data.
