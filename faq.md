@@ -6,6 +6,16 @@ nav_order: 4
 
 # FAQ
 
+## Language Support
+
+### What languages are supported?
+The most popular languages that use Latin script are fully supported, including English, Spanish, French, German, and Portuguese, among others.  
+
+Experimental support exists for Simplified Chinese.  Chinese text can be recognized and edited, however character positioning is less accurate, and only one font is currently included.
+
+### Can support for \[x\] language be added?
+Additional languages using Latin script can be easily added.  Feel free to request new languages in the [Git Issues](https://github.com/scribeocr/scribeocr/issues).  Languages using other scripts are more difficult to add, as they require new font resources and code.  Therefore, while all languages should be supported eventually, most non-Latin scripts will likely not be added in the near future.
+
 ## Recognizing Text with Built-in OCR Engine
 
 ### Why is recognition slow on my device/document?
